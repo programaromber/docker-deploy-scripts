@@ -1,20 +1,24 @@
 # Use postgres/example user/password credentials
-version: '3.1'
+version: '3.5'
 
 services:
-  postgres-compose:
+  postgres:
     image: postgres
-    restart: always
     environment:
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+       - //d/kdi/docker/volumes/postgres/12/data:/data/postgres   
     ports:
       - 5432:5432
-  
-  pgadmin-compose:
+    restart: unless-stopped
+      
+  pgadmin4:
     image: dpage/pgadmin4
-    restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: rafaelsalles.sistemas@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: postgres
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-rafaelsalles.sistemas@gmail.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-postgres}
     ports:
-      - 9090:80
+      - 5050:80
+    restart: unless-stopped 
+    depends_on:
+      - postgres
