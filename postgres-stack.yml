@@ -1,0 +1,20 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+  postgres-compose:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+  
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: rafaelsalles.sistemas@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+      - 9090:80
