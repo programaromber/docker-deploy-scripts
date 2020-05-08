@@ -1,4 +1,3 @@
-#echo "# docker-deploy-scripts" >> README.md
 #COMANDOS
 
 
